@@ -12,7 +12,7 @@ Deaths=zeros(length(S),length(Date));
 
 N = T.state;
 
-CC=T.positiveIncrease;
+CC=T.positive;
 DD=T.death;
 TT=T.positiveIncrease+T.negativeIncrease;
 TV=T.totalTestsViral;
@@ -32,3 +32,8 @@ indx=strcmp({S{jj}},N);
         end
     end
 end
+
+xlswrite('Dataset_COVID_Tracking_Project.xlsx', Tests, 'Daily_Test', 'B2:ER57') 
+xlswrite('Dataset_COVID_Tracking_Project.xlsx', Cases, 'Incidence_Cumulative', 'B2:ER57') 
+xlswrite('Dataset_COVID_Tracking_Project.xlsx', Deaths, 'Death_Cumulative', 'B2:ER57') 
+xlswrite('Dataset_COVID_Tracking_Project.xlsx', TestsViral, 'PCR_Cumulative', 'B2:ER57') 

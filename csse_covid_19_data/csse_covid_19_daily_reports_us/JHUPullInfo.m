@@ -40,3 +40,8 @@ Tests=[Tests TempT];
 Cases=[Cases TempC];
 Deaths=[Deaths TempD];
 end
+
+
+xlswrite('Dataset_JHU_Dashboard.xlsx', Tests, 'Test_Cumulative', 'B2:BN57') 
+xlswrite('Dataset_JHU_Dashboard.xlsx', Cases, 'Incidence_Cumulative', 'B2:BN57') 
+xlswrite('Dataset_JHU_Dashboard.xlsx', Deaths, 'Death_Cumulative', 'B2:BN57') 

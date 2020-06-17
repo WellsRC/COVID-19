@@ -25,3 +25,7 @@ indx=strcmp({S{jj}},N);
         end
     end
 end
+
+
+xlswrite('Dataset_NYTimes.xlsx', Cases, 'Incidence_Cumulative', 'B2:ER57') 
+xlswrite('Dataset_NYTimes.xlsx', Deaths, 'Death_Cumulative', 'B2:ER57') 

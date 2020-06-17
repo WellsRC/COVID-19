@@ -1,7 +1,0 @@
-load('States.mat','S');
-
-T = readtable('04-12-2020.csv');
-
-Tests=zeros(length(S),1);
-Cases=zeros(length(S),1);
-Deaths=zeros(length(S),1);
