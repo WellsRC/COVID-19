@@ -96,7 +96,19 @@ end
 
 %% Filter data
 
-StateRem=[6;7;8;9;10;11;12;16;17;18;21;23;24;25;28;30;31;32;33;35;39;42;44;53];
+Peak=zeros(length(Cases(:,1)),1);
+for ii=1:length(Peak)
+   Peak(ii)=find(Cases(ii,[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020'))==max(Cases(ii,[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020'))),1);
+end
+
+PeakTrunk=find(Peak<=(datenum('May 15,2020')-datenum('Janaury 21,2020')));
+DeathTrunk=find(CDeaths(PeakTrunk,end)>1000);
+
+DS=[[1:length(S)]' CDeaths(:,end)];
+
+DSS=sortrows(DS,2,'descend');
+
+StateRem=PeakTrunk(DeathTrunk);
 
 %% Write data
 csvwrite('DataforModel_Test.csv', Tests(StateRem,[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020'))) 
@@ -105,17 +117,13 @@ csvwrite('DataforModel_Death.csv', Deaths(StateRem,[datenum('Janaury 22,2020'):d
 xlswrite('StatesinFitting.xlsx', [{S{StateRem}}' {SA{StateRem}}']) 
 
 figure(1);
-for ii=1:24
-    subplot(6,4,ii);plot(Deaths(StateRem(ii),[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020')),'k');
+for ii=1:18
+    subplot(6,3,ii);plot(Deaths(StateRem(ii),[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020')),'k');
     box off
-    title(S{StateRem(ii)})
-    ylabel('Deaths');
 end
 
 figure(2);
-for ii=1:24
-    subplot(6,4,ii);plot(Cases(StateRem(ii),[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020')),'k');
+for ii=1:18
+    subplot(6,3,ii);plot(Cases(StateRem(ii),[datenum('Janaury 22,2020'):datenum('May 22,2020')]-datenum('Janaury 21,2020')),'k');
     box off
-    title(S{StateRem(ii)})
-    ylabel('Cases');
 end
